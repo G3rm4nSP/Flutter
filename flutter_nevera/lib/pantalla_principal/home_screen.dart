@@ -9,13 +9,14 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
     final List<CardFood> cards = List<CardFood>.generate(
-        5,
-        (i) => CardFood(
-              nombre: 'Item $i',
-              cantidad: i,
-              precio: i * 10,
-              image: AssetImage('assets/$i.jpg'),
-            ));
+      15,
+      (i) => CardFood(
+        nombre: 'Item $i',
+        cantidad: i,
+        precio: i * 10,
+        image: AssetImage('assets/${(i + 1) % 10}.jpg'),
+      ),
+    );
 
     return Scaffold(
       backgroundColor: colorScheme.background,
