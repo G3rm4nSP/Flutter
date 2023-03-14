@@ -43,7 +43,10 @@ class CardFood extends StatelessWidget {
     );
   }
 
-  void onPressed() {}
+  void onPressed() {
+
+    //onPressed aument a number that update the app flutter?
+  }
 }
 
 class Imagen extends StatelessWidget {
