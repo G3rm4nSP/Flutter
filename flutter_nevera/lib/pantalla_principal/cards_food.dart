@@ -42,11 +42,6 @@ class CardFood extends StatelessWidget {
       ),
     );
   }
-
-  void onPressed() {
-
-    //onPressed aument a number that update the app flutter?
-  }
 }
 
 class Imagen extends StatelessWidget {
@@ -94,7 +89,9 @@ class BotonAdd extends StatelessWidget {
             size: 45,
           ),
           color: const Color.fromARGB(255, 255, 255, 255),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
     );
