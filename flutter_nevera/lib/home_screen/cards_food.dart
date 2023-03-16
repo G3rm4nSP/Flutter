@@ -9,8 +9,10 @@ class CardFood extends StatelessWidget {
     required this.image,
     this.seleccionadas = 0,
     super.key,
+    required this.colorScheme,
   });
 
+  final ColorScheme colorScheme;
   final String nombre;
   final int cantidad;
   final double precio;
@@ -25,17 +27,17 @@ class CardFood extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
         margin: const EdgeInsets.only(bottom: 5, top: 5, left: 10, right: 10),
         elevation: 5,
-        color: Theme.of(context).colorScheme.inversePrimary,
+        color: colorScheme.primaryContainer,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            const BotonAdd(),
+            BotonAdd(colorScheme: colorScheme),
             Informacion(
-              nombre: nombre,
-              seleccionadas: seleccionadas,
-              cantidad: cantidad,
-              precio: precio,
-            ),
+                nombre: nombre,
+                seleccionadas: seleccionadas,
+                cantidad: cantidad,
+                precio: precio,
+                colorScheme: colorScheme),
             Imagen(image: image),
           ],
         ),
@@ -71,24 +73,26 @@ class Imagen extends StatelessWidget {
 class BotonAdd extends StatelessWidget {
   const BotonAdd({
     super.key,
+    required this.colorScheme,
   });
+
+  final ColorScheme colorScheme;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 10),
       child: Ink(
-        decoration: const ShapeDecoration(
-          color: Color.fromARGB(156, 255, 255, 0),
-          shape: CircleBorder(
-              side: BorderSide(color: Color.fromARGB(170, 255, 255, 255))),
+        decoration: ShapeDecoration(
+          color: colorScheme.inversePrimary,
+          shape: CircleBorder(side: BorderSide(color: colorScheme.onPrimary)),
         ),
         child: IconButton(
           icon: const Icon(
             Icons.add,
             size: 45,
           ),
-          color: const Color.fromARGB(255, 255, 255, 255),
+          color: colorScheme.onPrimary,
           onPressed: () {
             Navigator.pop(context);
           },
@@ -105,8 +109,10 @@ class Informacion extends StatelessWidget {
     required this.seleccionadas,
     required this.cantidad,
     required this.precio,
+    required this.colorScheme,
   });
 
+  final ColorScheme colorScheme;
   final String nombre;
   final int seleccionadas;
   final int cantidad;
@@ -119,20 +125,26 @@ class Informacion extends StatelessWidget {
       children: [
         Text(
           nombre,
-          style: const TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 30, color: Colors.white),
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 30,
+              color: colorScheme.onPrimaryContainer),
         ),
         const SizedBox(height: 15),
         Text(
           'Seleccionadas: $seleccionadas / $cantidad',
-          style: const TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 16, color: Colors.white),
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 16,
+              color: colorScheme.onPrimaryContainer),
         ),
         const SizedBox(height: 5),
         Text(
           'Precio $precio €',
-          style: const TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
+          style: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+              color: colorScheme.onPrimaryContainer),
         ),
       ],
     );

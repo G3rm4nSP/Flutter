@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nevera/pantalla_principal/app_bar.dart';
-import 'package:flutter_nevera/pantalla_principal/home_screen.dart';
-import 'package:flutter_nevera/pantalla_registro_usuario/registro_usuario.dart';
+import 'package:flutter_nevera/home_screen/home.dart';
+import 'package:flutter_nevera/register_screen/register.dart';
 import 'package:sizer/sizer.dart';
 
 class LogInScreen extends StatelessWidget {
@@ -11,31 +10,35 @@ class LogInScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var colorScheme = Theme.of(context).colorScheme;
     return Scaffold(
+      backgroundColor: colorScheme.primary,
       body: SafeArea(
           child: Stack(
         children: [
-          const FondoInicio(),
-          LogInForm(colorScheme: colorScheme),
+          LogInBackground(colorScheme: colorScheme),
+          LogInBox(colorScheme: colorScheme),
         ],
       )),
     );
   }
 }
 
-class FondoInicio extends StatelessWidget {
-  const FondoInicio({
+class LogInBackground extends StatelessWidget {
+  const LogInBackground({
+    required this.colorScheme,
     super.key,
   });
+
+  final ColorScheme colorScheme;
 
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/nevera.jpg"),
+          image: const AssetImage("assets/nevera.jpg"),
           fit: BoxFit.cover,
           colorFilter: ColorFilter.mode(
-            Color.fromARGB(255, 26, 83, 2),
+            colorScheme.primary,
             BlendMode.hardLight,
           ),
         ),
@@ -49,7 +52,7 @@ class FondoInicio extends StatelessWidget {
               "Bienvenido de nuevo!",
               style: TextStyle(
                 fontSize: 20.sp,
-                color: Colors.white,
+                color: colorScheme.onPrimary,
                 fontWeight: FontWeight.bold,
               ),
             ),
@@ -62,8 +65,8 @@ class FondoInicio extends StatelessWidget {
   }
 }
 
-class LogInForm extends StatelessWidget {
-  const LogInForm({
+class LogInBox extends StatelessWidget {
+  const LogInBox({
     super.key,
     required this.colorScheme,
   });
@@ -75,15 +78,43 @@ class LogInForm extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        const EsquinaPagina(),
-        WhiteBox(colorScheme: colorScheme),
+        EsquinaPagina(colorScheme: colorScheme),
+        SizedBox(
+          width: 100.w,
+          height: 47.h,
+          child: DecoratedBox(
+            decoration: BoxDecoration(
+                color: colorScheme.primaryContainer,
+                borderRadius: const BorderRadius.only(
+                  topLeft: Radius.circular(50),
+                )),
+            child: Column(
+              children: [
+                Expanded(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      LogInData(colorScheme: colorScheme),
+                      SizedBox(height: 2.h),
+                      LogInPasswordOptions(colorScheme: colorScheme),
+                      SizedBox(height: 3.h),
+                      LogInButton(colorScheme: colorScheme),
+                      SizedBox(height: 4.h),
+                      NewAcount(colorScheme: colorScheme),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
       ],
     );
   }
 }
 
-class WhiteBox extends StatelessWidget {
-  const WhiteBox({
+class LogInData extends StatelessWidget {
+  const LogInData({
     super.key,
     required this.colorScheme,
   });
@@ -92,116 +123,22 @@ class WhiteBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.transparent,
-      width: 100.w,
-      height: 47.h,
-      child: DecoratedBox(
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(50),
-            )),
-        child: Column(
-          children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  const LogInData(),
-                  SizedBox(height: 2.h),
-                  const PasswordOptions(),
-                  SizedBox(height: 4.h),
-                  BotonInicioSesion(colorScheme: colorScheme),
-                  SizedBox(height: 4.h),
-                  const Registro(),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class Registro extends StatelessWidget {
-  const Registro({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
+    return const Column(
       children: [
-        Text(
-          '¿No tienes cuenta?',
-          style: TextStyle(
-            fontSize: 12.sp,
-          ),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => const UserRegister()),
-            );
-          },
-          child: Text(
-            'Registrate',
-            style: TextStyle(
-              fontSize: 12.sp,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ),
+        Formulary(dato: 'Correo'),
+        Formulary(dato: 'Contraseña'),
       ],
     );
   }
 }
 
-class BotonInicioSesion extends StatelessWidget {
-  const BotonInicioSesion({
+class LogInPasswordOptions extends StatelessWidget {
+  const LogInPasswordOptions({
     super.key,
     required this.colorScheme,
   });
 
   final ColorScheme colorScheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 90.w,
-      height: 9.h,
-      child: ElevatedButton(
-        style: ButtonStyle(
-          backgroundColor:
-              MaterialStateProperty.all<Color>(colorScheme.primary),
-        ),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => const HomeScreen()),
-          );
-        },
-        child: Text(
-          'Iniciar Sesión',
-          style: TextStyle(
-            fontSize: 15.sp,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class PasswordOptions extends StatelessWidget {
-  const PasswordOptions({
-    super.key,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -228,6 +165,7 @@ class PasswordOptions extends StatelessWidget {
             style: TextStyle(
               fontSize: 12.sp,
               fontWeight: FontWeight.bold,
+              color: colorScheme.primary,
             ),
           ),
         ),
@@ -236,34 +174,76 @@ class PasswordOptions extends StatelessWidget {
   }
 }
 
-class LogInData extends StatelessWidget {
-  const LogInData({
+class LogInButton extends StatelessWidget {
+  const LogInButton({
     super.key,
+    required this.colorScheme,
   });
+
+  final ColorScheme colorScheme;
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        TextField(
+    return SizedBox(
+      width: 90.w,
+      height: 9.h,
+      child: ElevatedButton(
+        style: ButtonStyle(
+          backgroundColor:
+              MaterialStateProperty.all<Color>(colorScheme.primary),
+        ),
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const HomeScreen()),
+          );
+        },
+        child: Text(
+          'Iniciar Sesión',
           style: TextStyle(
-            fontSize: 12.sp,
+            fontSize: 15.sp,
+            color: colorScheme.onPrimary,
             fontWeight: FontWeight.bold,
-          ),
-          decoration: const InputDecoration(
-            border: UnderlineInputBorder(),
-            labelText: '   Correo',
           ),
         ),
-        TextField(
-          obscureText: true,
+      ),
+    );
+  }
+}
+
+class NewAcount extends StatelessWidget {
+  const NewAcount({
+    super.key,
+    required this.colorScheme,
+  });
+
+  final ColorScheme colorScheme;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        Text(
+          '¿No tienes cuenta?',
           style: TextStyle(
             fontSize: 12.sp,
-            fontWeight: FontWeight.bold,
           ),
-          decoration: const InputDecoration(
-            border: UnderlineInputBorder(),
-            labelText: '   Contraseña',
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const RegisterScreen()),
+            );
+          },
+          child: Text(
+            'Registrate',
+            style: TextStyle(
+              color: colorScheme.primary,
+              fontSize: 12.sp,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ],
@@ -273,9 +253,11 @@ class LogInData extends StatelessWidget {
 
 class EsquinaPagina extends StatelessWidget {
   const EsquinaPagina({
+    required this.colorScheme,
     super.key,
   });
 
+  final ColorScheme colorScheme;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -284,19 +266,18 @@ class EsquinaPagina extends StatelessWidget {
         Container(
           width: 12.w,
           height: 6.h,
-          color: Colors.white,
+          color: colorScheme.primaryContainer,
         ),
         Container(
           width: 15.w,
           height: 7.5.h,
           margin: EdgeInsets.only(left: 85.w),
-          color: Colors.transparent,
-          child: const DecoratedBox(
+          child: DecoratedBox(
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                   topLeft: Radius.circular(30),
                   bottomRight: Radius.circular(50)),
-              color: Color.fromARGB(255, 23, 74, 1),
+              color: colorScheme.primary,
             ),
           ),
         ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_nevera/pantalla_inicio_sesion/inicio_sesion.dart';
-import 'package:flutter_nevera/pantalla_principal/home_screen.dart';
-import 'package:flutter_nevera/pantalla_registro_usuario/registro_usuario.dart';
+import 'package:flutter_nevera/log_in_screen/log_in.dart';
+import 'package:flutter_nevera/home_screen/home.dart';
+import 'package:flutter_nevera/register_screen/register.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -20,7 +20,8 @@ class MyApp extends StatelessWidget {
           debugShowCheckedModeBanner: false,
           title: 'Nevera',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow),
+            colorScheme: ColorScheme.fromSeed(
+                seedColor: const Color.fromARGB(255, 255, 255, 0)),
             useMaterial3: true,
           ),
           home: const LogInScreen(),

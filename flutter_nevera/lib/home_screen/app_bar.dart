@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 class SuperiorBar extends StatelessWidget {
   const SuperiorBar({
     super.key,
+    required this.colorScheme,
   });
+
+  final ColorScheme colorScheme;
 
   @override
   Widget build(BuildContext context) {
