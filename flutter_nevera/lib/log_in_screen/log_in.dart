@@ -48,16 +48,18 @@ class LogInBackground extends StatelessWidget {
         child: Column(
           children: [
             SizedBox(height: 3.h),
-            Text(
-              "Bienvenido de nuevo!",
-              style: TextStyle(
-                fontSize: 20.sp,
-                color: colorScheme.onPrimary,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            Text("Bienvenido de nuevo!",
+                style: TextStyle(
+                  fontSize: 20.sp,
+                  color: colorScheme.onPrimary,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center),
             SizedBox(height: 3.h),
-            const Image(image: AssetImage("assets/logoCore.png")),
+            const Image(
+              image: AssetImage("assets/logoCore.png"),
+              alignment: Alignment.center,
+            ),
           ],
         ),
       ),

@@ -1,6 +1,10 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
-import 'app_bar.dart';
+import 'package:sizer/sizer.dart';
 import 'cards_food.dart';
+import 'cart_product.dart';
+import 'drawer.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -18,54 +22,159 @@ class HomeScreen extends StatelessWidget {
           colorScheme: colorScheme),
     );
 
+    final List<CartProduct> cart = List<CartProduct>.generate(
+      15,
+      (i) => CartProduct(
+          nombre: 'Item $i',
+          cantidad: i,
+          precio: i * 10,
+          image: AssetImage('assets/${(i + 1) % 10}.jpg'),
+          seleccionadas: i,
+          colorScheme: colorScheme),
+    );
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: colorScheme.primary,
         appBar: AppBar(
           backgroundColor: colorScheme.inversePrimary,
-          title: SuperiorBar(colorScheme: colorScheme),
-        ),
-        body: ListView.builder(
-          itemCount: cards.length,
-          itemBuilder: (context, index) {
-            return cards[index];
-          },
-        ),
-        drawer: Drawer(
-          // Add a ListView to the drawer. This ensures the user can scroll
-          // through the options in the drawer if there isn't enough vertical
-          // space to fit everything.
-          child: ListView(
-            // Important: Remove any padding from the ListView.
-            padding: EdgeInsets.zero,
+          title: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              DrawerHeader(
-                decoration: BoxDecoration(
-                  color: colorScheme.secondary,
-                ),
-                child: const Text('Drawer Header'),
+              SizedBox(
+                width: 5.w,
               ),
-              ListTile(
-                title: const Text('Item 1'),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.pop(context);
-                },
-              ),
-              ListTile(
-                title: const Text('Item 2'),
-                onTap: () {
-                  // Update the state of the app
-                  // ...
-                  // Then close the drawer
-                  Navigator.pop(context);
-                },
-              ),
+              const Text("LA NEVERA"),
+              IconButton(
+                  onPressed: () {
+                    print("Carrito");
+                  },
+                  tooltip: "Carrito",
+                  icon: const Icon(Icons.shopping_cart))
             ],
           ),
+          leading: Builder(
+            builder: (BuildContext context) {
+              return Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Ink(
+                  decoration: ShapeDecoration(
+                    color: colorScheme.inversePrimary,
+                    shape: CircleBorder(
+                        side: BorderSide(color: colorScheme.onPrimary)),
+                  ),
+                  child: const DecoratedBox(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                          image: AssetImage("assets/avatar.jpg")),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ),
         ),
+        drawer: PrincipalDrawer(colorScheme: colorScheme),
+        body: Stack(
+          children: [
+            ListView.builder(
+              itemCount: cart.length,
+              itemBuilder: (context, index) {
+                return cart[index];
+              },
+            ),
+            /*FloattingBoxCart(
+              colorScheme: colorScheme,
+              total: 20,
+              cart: cart,
+            )*/
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class FloattingBoxCart extends StatelessWidget {
+  const FloattingBoxCart({
+    super.key,
+    required this.colorScheme,
+    required this.total,
+    required this.cart,
+  });
+
+  final List<CartProduct> cart;
+  final double total;
+  final ColorScheme colorScheme;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: colorScheme.onPrimary.withOpacity(0.8),
+        borderRadius: BorderRadius.circular(20),
+      ),
+      child: Column(
+        children: [
+          const SizedBox(
+            height: 10,
+          ),
+          const Text(
+            "Carrito",
+            style: TextStyle(fontSize: 20),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          const Divider(
+            color: Colors.black,
+            thickness: 1,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          ListView.builder(
+            itemCount: cart.length,
+            itemBuilder: (context, index) {
+              return cart[index];
+            },
+          ),
+          const Text(
+            "No hay productos en el carrito",
+            style: TextStyle(fontSize: 20),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          const Divider(
+            color: Colors.black,
+            thickness: 1,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            'Total: $total €',
+            style: const TextStyle(fontSize: 20),
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          const Divider(
+            color: Colors.black,
+            thickness: 1,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          ElevatedButton(
+            onPressed: () {
+              print("Comprar");
+            },
+            child: const Text("Comprar"),
+          ),
+        ],
       ),
     );
   }

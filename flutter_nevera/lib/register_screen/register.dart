@@ -12,24 +12,24 @@ class RegisterScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: colorScheme.primary,
       body: SafeArea(
-        child: Stack(
-          children: [
-            LogInBackground(colorScheme: colorScheme),
-            RegisterBox(colorScheme: colorScheme),
-            Positioned(
-              top: 78.h,
-              left: 5.w,
-              child: ButtonPlusLogin(colorScheme: colorScheme),
+        child: SingleChildScrollView(
+          child: Expanded(
+            child: Column(
+              children: [
+                RegisterBackground(colorScheme: colorScheme),
+                RegisterBox(colorScheme: colorScheme),
+              ],
             ),
-          ],
+          ),
         ),
       ),
+      //bottomSheet: ButtonPlusLogin(colorScheme: colorScheme),
     );
   }
 }
 
-class LogInBackground extends StatelessWidget {
-  const LogInBackground({
+class RegisterBackground extends StatelessWidget {
+  const RegisterBackground({
     required this.colorScheme,
     super.key,
   });
@@ -64,7 +64,6 @@ class RegisterBox extends StatelessWidget {
       children: [
         GreenBox(colorScheme: colorScheme),
         SizedBox(
-          height: 67.h,
           child: DecoratedBox(
             decoration: BoxDecoration(
               color: colorScheme.primaryContainer,
@@ -72,29 +71,18 @@ class RegisterBox extends StatelessWidget {
                 topLeft: Radius.circular(50),
               ),
             ),
-            child: RegisterData(colorScheme: colorScheme),
+            child: Column(
+              children: [
+                RegisterData(colorScheme: colorScheme),
+                SizedBox(height: 3.h),
+                RegisterButton(colorScheme: colorScheme),
+                SizedBox(height: 2.h),
+                ExistentAccount(colorScheme: colorScheme),
+                SizedBox(height: 3.h),
+              ],
+            ),
           ),
         ),
-      ],
-    );
-  }
-}
-
-class ButtonPlusLogin extends StatelessWidget {
-  const ButtonPlusLogin({
-    super.key,
-    required this.colorScheme,
-  });
-
-  final ColorScheme colorScheme;
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        RegisterButton(colorScheme: colorScheme),
-        SizedBox(height: 4.h),
-        ExistentAccount(colorScheme: colorScheme),
       ],
     );
   }

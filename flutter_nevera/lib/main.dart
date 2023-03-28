@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_nevera/log_in_screen/log_in.dart';
-import 'package:flutter_nevera/home_screen/home.dart';
-import 'package:flutter_nevera/register_screen/register.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {

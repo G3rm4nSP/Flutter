@@ -124,7 +124,7 @@ packages:
     source: hosted
     version: "1.8.3"
   sizer:
-    dependency: "direct dev"
+    dependency: "direct main"
     description:
       name: sizer
       sha256: d2b3cb6cbc4a637f508dacd786bae55df31e5fc088044248a43e4fd1e050c117
