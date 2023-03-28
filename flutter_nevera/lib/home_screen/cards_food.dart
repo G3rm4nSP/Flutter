@@ -1,14 +1,13 @@
 //CARTAS
 import 'package:flutter/material.dart';
 
-class CardFood extends StatelessWidget {
+class CardFood extends StatefulWidget {
   const CardFood({
+    super.key,
     required this.nombre,
     required this.cantidad,
     required this.precio,
     required this.image,
-    this.seleccionadas = 0,
-    super.key,
     required this.colorScheme,
   });
 
@@ -17,7 +16,19 @@ class CardFood extends StatelessWidget {
   final int cantidad;
   final double precio;
   final AssetImage image;
-  final int seleccionadas;
+  @override
+  State<CardFood> createState() => _CardFoodState();
+}
+
+class _CardFoodState extends State<CardFood> {
+  int _seleccionadas = 0;
+  void _seleccionar(int add) {
+    setState(() {
+      _seleccionadas += add;
+    });
+
+    //total del carrito = total + precio;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,18 +38,21 @@ class CardFood extends StatelessWidget {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(40)),
         margin: const EdgeInsets.only(bottom: 5, top: 5, left: 10, right: 10),
         elevation: 5,
-        color: colorScheme.primaryContainer,
+        color: super.widget.colorScheme.primaryContainer,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            BotonAdd(colorScheme: colorScheme),
+            BotonAdd(
+              colorScheme: super.widget.colorScheme,
+              onChanged: _seleccionar,
+            ),
             Informacion(
-                nombre: nombre,
-                seleccionadas: seleccionadas,
-                cantidad: cantidad,
-                precio: precio,
-                colorScheme: colorScheme),
-            Imagen(image: image),
+                nombre: super.widget.nombre,
+                seleccionadas: _seleccionadas,
+                cantidad: super.widget.cantidad,
+                precio: super.widget.precio,
+                colorScheme: super.widget.colorScheme),
+            Imagen(image: super.widget.image),
           ],
         ),
       ),
@@ -74,29 +88,35 @@ class BotonAdd extends StatelessWidget {
   const BotonAdd({
     super.key,
     required this.colorScheme,
+    required this.onChanged,
   });
-
+  final ValueChanged<int> onChanged;
   final ColorScheme colorScheme;
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 10),
-      child: Ink(
-        decoration: ShapeDecoration(
-          color: colorScheme.inversePrimary,
-          shape: CircleBorder(side: BorderSide(color: colorScheme.onPrimary)),
-        ),
-        child: IconButton(
-          icon: const Icon(
-            Icons.add,
-            size: 45,
+      child: IconButton(
+        style: ButtonStyle(
+          iconSize: MaterialStateProperty.all(40),
+          fixedSize: MaterialStateProperty.all(const Size(55, 55)),
+          backgroundColor:
+              MaterialStateProperty.all(colorScheme.inversePrimary),
+          shape: MaterialStateProperty.all(
+            CircleBorder(
+              side: BorderSide(color: colorScheme.onPrimary),
+            ),
           ),
-          color: colorScheme.onPrimary,
-          onPressed: () {
-            Navigator.pop(context);
-          },
         ),
+        icon: Icon(
+          fill: BorderSide.strokeAlignCenter,
+          Icons.add,
+          color: colorScheme.onPrimary,
+        ),
+        onPressed: () {
+          onChanged(1);
+        },
       ),
     );
   }

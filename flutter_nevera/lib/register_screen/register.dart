@@ -269,25 +269,22 @@ class BotonBack extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
+    return Container(
+      width: 25.w,
       padding: EdgeInsets.only(left: 5.w, right: 8.w),
-      child: DecoratedBox(
-        decoration: BoxDecoration(
-          color: colorScheme.inversePrimary,
-          borderRadius: const BorderRadius.all(
-            Radius.circular(30),
-          ),
+      child: FloatingActionButton(
+        backgroundColor: colorScheme.inversePrimary,
+        shape: CircleBorder(
+          side: BorderSide(color: colorScheme.onPrimary),
         ),
-        child: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            size: 30,
-          ),
-          color: colorScheme.onSurface,
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        child: Icon(
+          Icons.arrow_back,
+          size: 40,
+          color: colorScheme.onPrimary,
         ),
+        onPressed: () {
+          Navigator.pop(context);
+        },
       ),
     );
   }
