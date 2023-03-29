@@ -21,10 +21,13 @@ class CardFood extends StatefulWidget {
 }
 
 class _CardFoodState extends State<CardFood> {
+  CardFood get widget => super.widget;
+
   int _seleccionadas = 0;
+  int _cantidad = widget.cantidad;
   void _seleccionar(int add) {
     setState(() {
-      _seleccionadas += add;
+      if (_cantidad >= _seleccionadas + add) _seleccionadas += add;
     });
 
     //total del carrito = total + precio;

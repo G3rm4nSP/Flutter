@@ -16,7 +16,7 @@ class ShoppingCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(20.0),
+      padding: const EdgeInsets.all(0.0),
       child: FloattingBoxCart(
         colorScheme: colorScheme,
         totalCesta: totalCesta,
@@ -61,7 +61,6 @@ class FloattingBoxCartState extends State<FloattingBoxCart> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        automaticallyImplyLeading: false,
         title: const Center(
           child: Text(
             "Cesta de la Compra",
@@ -82,8 +81,8 @@ class FloattingBoxCartState extends State<FloattingBoxCart> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            PayButton(colorScheme: colorScheme),
-            Text("Total: $totalCesta", style: const TextStyle(fontSize: 20)),
+            PayButton(colorScheme: super.widget.colorScheme),
+            Text("Total: 29 €", style: TextStyle(fontSize: 20)),
           ],
         ),
       ),

@@ -1,8 +1,9 @@
 //CARTAS
+// ignore_for_file: must_be_immutable
 import 'package:flutter/material.dart';
 
 class CartProduct extends StatelessWidget {
-  const CartProduct({
+  CartProduct({
     required this.nombre,
     required this.cantidad,
     required this.precio,
@@ -13,13 +14,13 @@ class CartProduct extends StatelessWidget {
     required this.colorScheme,
   });
 
-  final double total;
+  double total;
   final ColorScheme colorScheme;
   final String nombre;
   final int cantidad;
   final double precio;
   final AssetImage image;
-  final int seleccionadas;
+  int seleccionadas;
 
   @override
   Widget build(BuildContext context) {
