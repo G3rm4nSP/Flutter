@@ -30,6 +30,9 @@ environment:
 dependencies:
 
   sizer: ^2.0.15
+  flutter_facebook_auth: ^4.0.0
+  google_sign_in: ^5.0.0
+  firebase_auth: ^3.3.3
 
   flutter:
     sdk: flutter

@@ -27,7 +27,10 @@ class _CardFoodState extends State<CardFood> {
   int _cantidad = 20;
   void _seleccionar(int add) {
     setState(() {
-      if (_cantidad >= _seleccionadas + add) _seleccionadas += add;
+      if (_seleccionadas + add <= widget.cantidad &&
+          _cantidad >= _seleccionadas + add) {
+        _seleccionadas += add;
+      }
     });
 
     //total del carrito = total + precio;

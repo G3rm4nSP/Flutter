@@ -16,86 +16,93 @@ class RegisterBoxV2 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Visibility(
       visible: is_visible,
-      child: Padding(
-        padding: EdgeInsets.only(left: 3.0.w, right: 3.0.w, top: 30.h),
+      child: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              alignment: Alignment.centerLeft,
-              padding: EdgeInsets.only(bottom: 2.h, left: 2.h),
-              child: Text(
-                "Register",
-                style: TextStyle(
-                  fontSize: 20.sp,
-                  color: colorScheme.onPrimary,
-                  fontWeight: FontWeight.bold,
-                ),
-                textAlign: TextAlign.center,
-              ),
+            SizedBox(
+              height: 30.h,
             ),
-            DecoratedBox(
-              decoration: BoxDecoration(
-                //color: colorScheme.primaryContainer.withOpacity(.8),
-                gradient: LinearGradient(
-                  colors: [
-                    Colors.greenAccent.withOpacity(0.9),
-                    Colors.green.withOpacity(0.9),
-                  ],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: const BorderRadius.all(
-                  Radius.circular(20),
-                ),
-              ),
-              child: Container(
-                margin: EdgeInsets.all(3.h),
-                child: Column(
-                  children: [
-                    Container(
-                      alignment: Alignment.centerLeft,
+            Padding(
+              padding: EdgeInsets.only(left: 3.0.w, right: 3.0.w),
+              child: Column(
+                children: [
+                  Container(
+                    alignment: Alignment.centerLeft,
+                    padding: EdgeInsets.only(bottom: 2.h, left: 2.h),
+                    child: Text(
+                      "Register",
+                      style: TextStyle(
+                        fontSize: 20.sp,
+                        color: colorScheme.onPrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                  DecoratedBox(
+                    decoration: BoxDecoration(
+                      //color: colorScheme.primaryContainer.withOpacity(.8),
+                      gradient: LinearGradient(
+                        colors: [
+                          colorScheme.primary.withOpacity(0.9),
+                          colorScheme.onPrimaryContainer.withOpacity(0.9),
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                      borderRadius: const BorderRadius.all(
+                        Radius.circular(20),
+                      ),
+                    ),
+                    child: Container(
+                      margin: EdgeInsets.all(3.h),
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            "Looks like you don't have an acount.\nLets create a new acount for",
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              color: colorScheme.onPrimary,
+                          Container(
+                            alignment: Alignment.centerLeft,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Looks like you don't have an acount.\nLets create a new acount for",
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
+                                    color: colorScheme.onPrimary,
+                                  ),
+                                ),
+                                Text(
+                                  "example@lol.com",
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
+                                    color: colorScheme.onPrimary,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          Text(
-                            "example@lol.com",
-                            style: TextStyle(
-                              fontSize: 12.sp,
-                              color: colorScheme.onPrimary,
-                              fontWeight: FontWeight.bold,
-                            ),
+                          SizedBox(
+                            height: 3.h,
                           ),
+                          const Formulary(dato: "Name"),
+                          SizedBox(
+                            height: 3.h,
+                          ),
+                          const Formulary(dato: "Password", isPassword: true),
+                          SizedBox(
+                            height: 3.h,
+                          ),
+                          const Formulary(
+                              dato: "Confirm Password", isPassword: true),
+                          SizedBox(
+                            height: 3.h,
+                          ),
+                          LogInButton(colorScheme: colorScheme),
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 3.h,
-                    ),
-                    const Formulary(dato: "Name"),
-                    SizedBox(
-                      height: 3.h,
-                    ),
-                    const Formulary(dato: "Password", isPassword: true),
-                    SizedBox(
-                      height: 3.h,
-                    ),
-                    const Formulary(dato: "Confirm Password", isPassword: true),
-                    SizedBox(
-                      height: 3.h,
-                    ),
-                    LogInButton(colorScheme: colorScheme),
-                    SizedBox(
-                      height: 3.h,
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ],
