@@ -102,7 +102,7 @@ class GreenBox extends StatelessWidget {
       alignment: Alignment.bottomRight,
       children: [
         Container(
-          width: 12.w,
+          width: 100.w,
           height: 6.h,
           color: colorScheme.primaryContainer,
         ),

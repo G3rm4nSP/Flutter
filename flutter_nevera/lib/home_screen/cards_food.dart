@@ -24,7 +24,7 @@ class _CardFoodState extends State<CardFood> {
   CardFood get widget => super.widget;
 
   int _seleccionadas = 0;
-  int _cantidad = widget.cantidad;
+  int _cantidad = 20;
   void _seleccionar(int add) {
     setState(() {
       if (_cantidad >= _seleccionadas + add) _seleccionadas += add;

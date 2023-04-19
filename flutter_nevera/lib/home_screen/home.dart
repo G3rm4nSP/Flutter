@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool _carrito = false;
-
+  int currentPageIndex = 0;
   void _mostrarCarrito(bool newValue) {
     setState(() {
       _carrito = newValue;
@@ -49,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
               mostrarCarrito: _mostrarCarrito,
               active: _carrito),
         ),
-
+        //DRAWER
         drawer: PrincipalDrawer(colorScheme: colorScheme),
         //BODY
         body: Stack(
@@ -71,6 +71,33 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ),
           ],
+        ),
+        bottomNavigationBar: NavigationBar(
+          destinations: const [
+            NavigationDestination(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.favorite),
+              label: 'Favorites',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.bookmark),
+              label: 'Cart',
+            ),
+            NavigationDestination(
+              icon: Icon(Icons.shopping_cart),
+              label: 'Search',
+            ),
+          ],
+          selectedIndex: currentPageIndex,
+          onDestinationSelected: (int index) {
+            setState(() {
+              print(currentPageIndex);
+              currentPageIndex = index;
+            });
+          },
         ),
       ),
     );

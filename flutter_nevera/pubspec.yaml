@@ -30,6 +30,7 @@ environment:
 dependencies:
 
   sizer: ^2.0.15
+
   flutter:
     sdk: flutter
 

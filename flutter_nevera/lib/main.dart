@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_nevera/log_in_screen/log_in.dart';
+import 'package:flutter_nevera/inicio/inicio.dart';
 import 'package:sizer/sizer.dart';
 
 void main() {
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
                 seedColor: const Color.fromARGB(255, 255, 255, 0)),
             useMaterial3: true,
           ),
-          home: const LogInScreen(),
+          home: const Inicio(),
         );
       },
     );
